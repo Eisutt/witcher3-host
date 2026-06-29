@@ -10,6 +10,9 @@ services:
     volumes:
       - ./configs/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./html:/usr/share/nginx/html:ro
+      # Директории для certbot
+      - ./configs/certbot/conf:/etc/letsencrypt:ro
+      - ./configs/certbot/www:/var/www/certbot:ro
     networks: 
       - monitoring_net
   prometheus:
@@ -39,6 +42,14 @@ services:
     volumes:
       - ./configs/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
     networks: 
+      - monitoring_net
+  certbot: 
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - ./configs/certbot/conf:/etc/letsencrypt
+      - ./configs/certbot/www:/var/www/certbot
+    networks:
       - monitoring_net
 
 
