@@ -11,4 +11,4 @@
 
 .env
 
-docker/configs/alertmanager/alertmanager.yml
+project/docker/configs/alertmanager/alertmanager.yml
