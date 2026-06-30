@@ -51,6 +51,18 @@ services:
       - ./configs/certbot/www:/var/www/certbot
     networks:
       - monitoring_net
+  node_exporter: 
+    image: prom/node-exporter
+    container_name: node_exporter
+    restart: unless-stopped
+    volumes:
+      - /:/host:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+    command: 
+      - '--path.rootfs=/host'
+    networks:
+      - monitoring_net
 
 
 volumes:
