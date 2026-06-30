@@ -63,6 +63,19 @@ services:
       - '--path.rootfs=/host'
     networks:
       - monitoring_net
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    restart: unless-stopped
+    privileged: true
+    volumes:
+      - /:/rootfs
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker
+      - /dev/disk:/dev/disk
+    networks:
+      - monitoring_net
 
 
 volumes:

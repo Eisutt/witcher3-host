@@ -10,3 +10,5 @@
 *.tfvars.json
 
 .env
+
+docker/configs/alertmanager/alertmanager.yml

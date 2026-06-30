@@ -1,4 +1,8 @@
 route:
-  receiver: 'blackhole'
+  receiver: 'tg_bot'
+  repeat_interval: 15m
 receivers:
-  - name: 'blackhole'
+  - name: 'tg-bot'
+    telegram_configs:
+      - bot_token: '8694447245:AAG5_QFczKJyd1F7VIuNb4vi6StJ7t9kG5I'
+        chat_id: 8694447245
