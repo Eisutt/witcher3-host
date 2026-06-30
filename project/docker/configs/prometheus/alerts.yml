@@ -1,0 +1,19 @@
+groups:
+  - name: container_alerts
+    rules: 
+    - alert: NodeExporterDown
+      expr: up{job="node_exporter"} == 0
+      for: 1m
+      labels:
+        severity: critical
+      annotations: 
+        summary: "Сервер недоступен"
+        description: "node_exporter недоступен более 1 минуты"
+    - alert: NginxDown
+      expr: absent(container_last_seen{name="nginx"})
+      for: 1m
+      labels: 
+        severity: critical
+      annotations:
+        summary: "nginx недоступен"
+        description: "nginx недоступен более 1 минуты"
