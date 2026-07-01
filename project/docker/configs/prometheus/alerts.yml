@@ -10,7 +10,7 @@ groups:
         summary: "Сервер недоступен"
         description: "node_exporter недоступен более 1 минуты"
     - alert: NginxDown
-      expr: absent(container_last_seen{name="nginx"})
+      expr: time() - container_last_seen{name="nginx"} > 60
       for: 1m
       labels: 
         severity: critical
