@@ -1,0 +1,9 @@
+route:
+  receiver: 'tg_bot'
+  repeat_interval: 15m
+
+receivers:
+  - name: 'tg_bot'
+    telegram_configs:
+      - bot_token: '<YOUR_TELEGRAM_BOT_TOKEN_HERE>'
+        chat_id: <YOUR_CHAT_ID_HERE>
