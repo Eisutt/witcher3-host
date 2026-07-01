@@ -20,7 +20,7 @@ services:
     container_name: prometheus
     restart: unless-stopped
     volumes:
-      - ./configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./configs/prometheus:/etc/prometheus:ro
       - prometheus_data:/prometheus
     networks:
       - monitoring_net
