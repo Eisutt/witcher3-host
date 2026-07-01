@@ -7,3 +7,5 @@ receivers:
     telegram_configs:
       - bot_token: '<YOUR_TELEGRAM_BOT_TOKEN_HERE>'
         chat_id: <YOUR_CHAT_ID_HERE>
+        http_configs: 
+          proxy_url: 'http://твой_логин:твой_пароль@IP_ГЕРМАНСКОЙ_VPS:2080'
