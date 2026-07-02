@@ -18,5 +18,5 @@ receivers:
           
           {{ range .Alerts }}
           <b>Описание:</b> {{ .Annotations.description }}
-          <b>Время старта:</b> {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+          <b>Время старта:</b> {{ .StartsAt.Local.Format "2006-01-02 15:04:05" }}
           {{ end }}
