@@ -2,10 +2,10 @@ groups:
   - name: container_alerts
     rules: 
       - alert: NginxContainerDown
-        expr: up{job="nginx"} == 0
+        expr: (time() - container_last_seen{name="nginx"} > 60) or absent(container_last_seen{name="nginx"})
         for: 1m
         labels:
           severity: critical
         annotations:
           summary: "Контейнер Nginx недоступен!"
-          description: "Метрика up{job='nginx'} равна 0 уже более 1 минуты. Контейнер на хосте {{ $labels.instance }} мог остановиться."
+          description: "cAdvisor сообщает, что Nginx остановлен или не отвечает."

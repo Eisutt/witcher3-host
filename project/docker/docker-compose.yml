@@ -68,28 +68,17 @@ services:
     networks:
       - monitoring_net
   
-  # cadvisor:
-  #   image: gcr.io/cadvisor/cadvisor:latest
-  #   container_name: cadvisor
-  #   restart: unless-stopped
-  #   privileged: true
-  #   volumes:
-  #     - /:/rootfs:ro
-  #     - /var/run:/var/run:ro
-  #     - /sys:/sys:ro
-  #     - /var/lib/docker:/var/lib/docker
-  #     - /dev/disk:/dev/disk
-  #   networks:
-  #     - monitoring_net
-
-  blackbox:
-    image: prom/blackbox-exporter:latest
-    container_name: blackbox
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
     restart: unless-stopped
-    ports:
-      - "9115:9115"
+    privileged: true
     volumes:
-      - ./configs/blackbox:/etc/blackbox_exporter:ro
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker
+      - /dev/disk:/dev/disk
     networks:
       - monitoring_net
 
