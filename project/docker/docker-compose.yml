@@ -41,6 +41,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./configs/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+      - /etc/localtime:/etc/localtime:ro
     networks: 
       - monitoring_net
   certbot: 
