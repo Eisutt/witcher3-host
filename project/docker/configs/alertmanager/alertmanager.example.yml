@@ -10,11 +10,13 @@ receivers:
         http_config: 
           proxy_url: 'http://твой_логин:твой_пароль@IP_ГЕРМАНСКОЙ_VPS:2080'
         parse_mode: 'HTML'
-        message: |-
-          {{ range .Alerts }}
-          {{ if eq .Status "firing" }}<b>ПРОБЛЕМА</b>{{ else }}<b>РЕШЕНО</b>{{ end }}
-          <b>{{ .Annotations.summary }}</b>
-          {{ .Annotations.description }}
+        message: |
+          <b>[УВЕДОМЛЕНИЕ]</b>
+          {{ if eq .Status "firing" }}🚨 <b>СБОЙ:</b>{{ else }}✅ <b>ВОССТАНОВЛЕНИЕ:</b>{{ end }}
+          <b>Алерт:</b> {{ .CommonLabels.alertname }}
+          <b>Важность:</b> {{ .CommonLabels.severity }}
           
-          Время: <code>{{ .StartsAt.Format "2006-01-02 15:04:05" }}</code>
+          {{ range .Alerts }}
+          <b>Описание:</b> {{ .Annotations.description }}
+          <b>Время старта:</b> {{ .StartsAt.Format "2006-01-02 15:04:05" }}
           {{ end }}
