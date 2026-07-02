@@ -7,5 +7,14 @@ receivers:
     telegram_configs:
       - bot_token: '<YOUR_TELEGRAM_BOT_TOKEN_HERE>'
         chat_id: <YOUR_CHAT_ID_HERE>
-        http_configs: 
+        http_config: 
           proxy_url: 'http://твой_логин:твой_пароль@IP_ГЕРМАНСКОЙ_VPS:2080'
+        parse_mode: 'HTML'
+        message: |-
+          {{ range .Alerts }}
+          {{ if eq .Status "firing" }}<b>ПРОБЛЕМА</b>{{ else }}<b>РЕШЕНО</b>{{ end }}
+          <b>{{ .Annotations.summary }}</b>
+          {{ .Annotations.description }}
+          
+          Время: <code>{{ .StartsAt.Format "2006-01-02 15:04:05" }}</code>
+          {{ end }}
