@@ -1,19 +1,11 @@
 groups:
   - name: container_alerts
     rules: 
-    - alert: NodeExporterDown
-      expr: up{job="node_exporter"} == 0
-      for: 1m
-      labels:
-        severity: critical
-      annotations: 
-        summary: "Сервер недоступен"
-        description: "node_exporter недоступен более 1 минуты"
     - alert: NginxDown
-      expr: time() - container_last_seen{name="nginx"} > 60
+      expr: probe_success{job="blackbox_nginx"} == 0
       for: 1m
       labels: 
         severity: critical
       annotations:
-        summary: "nginx недоступен"
-        description: "nginx недоступен более 1 минуты"
+        summary: "Nginx недоступен (Blackbox)"
+        description: "Веб-сервер Nginx не отвечает на HTTP-запросы или выдает ошибку. Сайт лежит."
