@@ -12,3 +12,6 @@
 .env
 
 docker/configs/alertmanager/alertmanager.yml
+
+# SSL сертификаты Certbot
+docker/configs/certbot/conf/
