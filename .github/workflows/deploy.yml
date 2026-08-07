@@ -16,17 +16,17 @@ jobs:
       # 2. Создаем файл .env из секретов GitHub
       - name: Create .env file
         run: |
-          echo "${{ secrets.PROD_ENV }}" > docker/.env
+          echo "${{ secrets.PROD_ENV }}" > project/docker/.env
 
       # 3. Копируем SSL-сертификаты из старой рабочей папки
       - name: Copy SSL certificates
         run: |
-          mkdir -p docker/configs/certbot
-          sudo cp -r /home/eisutt/witcher3-host/project/docker/configs/certbot/conf docker/configs/certbot/
+          mkdir -p project/docker/configs/certbot
+          sudo cp -r /home/eisutt/witcher3-host/project/docker/configs/certbot/conf project/docker/configs/certbot/
 
       # 4. Перезапускаем Docker Compose
       - name: Restart Docker containers
         run: |
-          cd docker
+          cd project/docker
           docker compose down
           docker compose up -d --build
