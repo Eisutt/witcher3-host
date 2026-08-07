@@ -23,6 +23,20 @@ jobs:
         run: |
           mkdir -p project/docker/configs/certbot
           sudo cp -r /home/eisutt/witcher3-host/project/docker/configs/certbot/conf project/docker/configs/certbot/
+      
+      # Создаем alertmanager.yml из секретов
+      - name: Create Alertmanager config
+        run: |
+          cat <<EOF > project/docker/configs/alertmanager/alertmanager.yml
+          route:
+            receiver: 'tg_bot'
+            repeat_interval: 15m
+          receivers:
+            - name: 'tg_bot'
+              telegram_configs:
+                - bot_token: '${{ secrets.TG_BOT_TOKEN }}'
+                  chat_id: ${{ secrets.TG_CHAT_ID }}
+          EOF
 
       # 4. Перезапускаем Docker Compose
       - name: Restart Docker containers
