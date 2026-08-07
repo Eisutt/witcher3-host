@@ -1,0 +1,32 @@
+name: Deploy to Selectel
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    
+    steps:
+      # 1. Скачиваем актуальный код
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Создаем файл .env из секретов GitHub
+      - name: Create .env file
+        run: |
+          echo "${{ secrets.PROD_ENV }}" > docker/.env
+
+      # 3. Копируем SSL-сертификаты из старой рабочей папки
+      - name: Copy SSL certificates
+        run: |
+          mkdir -p docker/configs/certbot
+          sudo cp -r /home/eisutt/witcher3-host/project/docker/configs/certbot/conf docker/configs/certbot/
+
+      # 4. Перезапускаем Docker Compose
+      - name: Restart Docker containers
+        run: |
+          cd docker
+          docker compose down
+          docker compose up -d --build
