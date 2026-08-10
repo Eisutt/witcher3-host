@@ -23,6 +23,7 @@ jobs:
         run: |
           mkdir -p project/docker/configs/certbot
           sudo cp -r /home/eisutt/witcher3-host/project/docker/configs/certbot/conf project/docker/configs/certbot/
+          sudo chown -R eisutt:eisutt project/docker/configs/certbot/conf
       
       # Создаем alertmanager.yml из секретов
       - name: Create Alertmanager config
