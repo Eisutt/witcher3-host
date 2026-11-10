@@ -79,7 +79,6 @@ flowchart LR
     │       ├── prometheus/             # prometheus.yml, alerts.yml
     │       ├── alertmanager/           # alertmanager.example.yml (боевой генерируется в CI)
     │       └── certbot/                # сертификаты (в .gitignore)
-    ├── .gitlab-ci.yml                  # первая версия пайплайна, до переезда на GitHub Actions
     └── .gitignore
 ```
 
