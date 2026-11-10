@@ -43,5 +43,5 @@ jobs:
       - name: Restart Docker containers
         run: |
           cd project/docker
-          docker compose down
-          docker compose up -d --build
+          # без down: пересоздаются только изменившиеся контейнеры, без простоя всего стека
+          docker compose up -d --remove-orphans

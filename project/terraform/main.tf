@@ -38,7 +38,7 @@ resource "selectel_iam_serviceuser_v1" "serviceuser_1" {
 # Авторизация в OpenStack для создания ВМ и сетей
 provider "openstack" {
   auth_url    = "https://cloud.api.selcloud.ru/identity/v3"
-  domain_name = "526898"
+  domain_name = var.sel_domain
   tenant_id   = selectel_vpc_project_v2.project_1.id
   user_name   = selectel_iam_serviceuser_v1.serviceuser_1.name
   password    = selectel_iam_serviceuser_v1.serviceuser_1.password
